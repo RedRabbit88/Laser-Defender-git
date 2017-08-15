@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: ac34c1dcd4d5fe144bd0bb63f69ecec0
+timeCreated: 1500681798
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: BREAK IT
+  fontNames:
+  - BREAK IT
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

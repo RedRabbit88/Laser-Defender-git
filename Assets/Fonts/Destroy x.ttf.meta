@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 9f3818475dc3e3d4ba0bfd65dc0e711f
+timeCreated: 1500681840
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Destroy X
+  fontNames:
+  - Destroy X
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
