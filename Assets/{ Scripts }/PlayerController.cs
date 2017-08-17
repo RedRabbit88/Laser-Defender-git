@@ -2,28 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-[System.Serializable]
-public class Boundary
-{
-    public float xBuffer, yBufferTop, yBufferBottom;
-}
-
-
 public class PlayerController : MonoBehaviour {
 
-    public float speed = 10f;
-    public float boost = 1.75f;
-    public float rotationMultiplier = 1f;
     public Boundary boundary;
-    private Rigidbody rb;
+    private EnemySpawner es;
+    private MoveShip ms;
     Camera cam;
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        es = FindObjectOfType<EnemySpawner>();
+        ms = GetComponent<MoveShip>();
         cam = Camera.main;
-        Debug.Log("Rotation of " + gameObject.name + ": " + transform.rotation.eulerAngles.z);
     }
 
     private void Update()
@@ -46,22 +36,16 @@ public class PlayerController : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        // Movement
+        // Movement (Player)
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
         if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
         {
-            rb.velocity = new Vector3(h, v, 0f) * (speed * boost) * Time.deltaTime;
+            ms.ShipBoost(h, v);
         }
         else
         {
-            rb.velocity = new Vector3(h, v, 0f) * speed * Time.deltaTime;
+            ms.ShipMove(h, v);
         }
-
-        // Rotation
-        transform.rotation = Quaternion.Euler(
-            transform.rotation.eulerAngles.x,
-            0f + (-rb.velocity.x * rotationMultiplier),
-            transform.rotation.eulerAngles.z);
     }
 }

@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4993228562279812}
   - component: {fileID: 33401783029525960}
   - component: {fileID: 23251061335632462}
+  - component: {fileID: 64109606392702696}
   m_Layer: 0
   m_Name: Frigate
   m_TagString: Untagged
@@ -37,11 +38,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4514065643436144}
   - component: {fileID: 114469580969041348}
+  - component: {fileID: 114441736678893748}
   - component: {fileID: 54106290954127240}
-  - component: {fileID: 64932453191139766}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -66,7 +67,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1542263636615612}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -127,20 +128,34 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!64 &64932453191139766
+--- !u!64 &64109606392702696
 MeshCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1639102457313064}
+  m_GameObject: {fileID: 1542263636615612}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300002, guid: 491e8447b2c498c499d7b8d5ea38857f, type: 3}
+--- !u!114 &114441736678893748
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1639102457313064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59d7864a8495b4f4eab96051194f70b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 350
+  boost: 1.75
+  rotationMultiplier: 1
 --- !u!114 &114469580969041348
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -152,9 +167,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ce3888cb340f2a4a951ca7d19674812, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 350
-  boost: 1.75
-  rotationMultiplier: 5
   boundary:
     xBuffer: 1
     yBufferTop: 3
