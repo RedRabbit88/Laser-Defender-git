@@ -16,4 +16,12 @@ public class EnemySpawner : MonoBehaviour {
             Instantiate(enemy1, pos.transform.position, Quaternion.identity, pos.transform);
         }
     }
+
+    public void UpdateRefPos()
+    {
+        foreach(EnemyController enemy in transform)
+        {
+            enemy.referencePos = enemy.transform.position.y;
+        }
+    }
 }

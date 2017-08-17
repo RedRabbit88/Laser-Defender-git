@@ -283,7 +283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce438c394ff0cdc46ad7d5f953647bc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy1: {fileID: 4646689476400142, guid: 23778bb61c6fd074490a0c1fb2a87dc4, type: 2}
+  enemy1: {fileID: 224311825583199972, guid: 23778bb61c6fd074490a0c1fb2a87dc4, type: 2}
   distanceToEdge: 0
   moveLeft: 1
   moveForward: 0

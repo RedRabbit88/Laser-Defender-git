@@ -5,13 +5,11 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
     public Boundary boundary;
-    private EnemySpawner es;
     private MoveShip ms;
     Camera cam;
 
     private void Start()
     {
-        es = FindObjectOfType<EnemySpawner>();
         ms = GetComponent<MoveShip>();
         cam = Camera.main;
     }

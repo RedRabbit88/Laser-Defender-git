@@ -1,14 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public class EnemyController : MonoBehaviour {
 
     public Boundary boundary;
+    public float referencePos = 0f;
     private EnemySpawner es;
     private MoveShip ms;
-    public float previousVPos = 0f;
+    private Text text;
     Camera cam;
 
     private void Start()
@@ -16,7 +18,13 @@ public class EnemyController : MonoBehaviour {
         es = FindObjectOfType<EnemySpawner>();
         ms = GetComponent<MoveShip>();
         cam = Camera.main;
-        previousVPos = transform.position.y;
+        text = GetComponentInChildren<Text>();
+        es.UpdateRefPos();
+    }
+
+    private void Update()
+    {
+        DisplayPositionText();
     }
 
     private void FixedUpdate()
@@ -27,11 +35,11 @@ public class EnemyController : MonoBehaviour {
 
 
         // move left
-        if (es.moveLeft == true && es.moveForward == false) {
+        if (es.moveForward == false && es.moveLeft == true) {
             ms.ShipMove(-1f, 0f); }
 
         // move right
-        if (es.moveLeft == false && es.moveForward == false) {
+        if (es.moveForward == false && es.moveLeft == false) {
             ms.ShipMove(1f, 0f); }
 
 
@@ -41,6 +49,7 @@ public class EnemyController : MonoBehaviour {
                 (transform.position.x >= viewMax.x - boundary.xBuffer && es.moveLeft == false))
             )
         {
+            referencePos = transform.position.y;
             es.moveForward = true;
         }
 
@@ -48,7 +57,7 @@ public class EnemyController : MonoBehaviour {
         // move forward
         if (es.moveForward == true)
         {
-            if(transform.position.y > previousVPos - 1)
+            if(transform.position.y > referencePos - 1)
             {
                 // transform.position = new Vector3(transform.position.x, previousVPos - 1f, 0f);
                 ms.ShipMove(0f, -1f);
@@ -62,12 +71,17 @@ public class EnemyController : MonoBehaviour {
                 } else if (es.moveLeft == false) {
                     es.moveLeft = true; }
 
-                Debug.Log("setting previous VPos to: " + previousVPos);
-                previousVPos = transform.position.y;
                 
+                DisplayPositionText();
+
                 es.moveForward = false;
             }
         }
     }
 
+    void DisplayPositionText()
+    {
+        text.text = "ref Y pos: " + referencePos + "\n" +
+            "current pos: " + transform.position.y;
+    }
 }
