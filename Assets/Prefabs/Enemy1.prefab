@@ -191,7 +191,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1563957291144272}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
@@ -217,7 +217,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Test Text
+  m_Text: 
 --- !u!114 &114300713813829356
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -233,7 +233,7 @@ MonoBehaviour:
     xBuffer: 1
     yBufferTop: 0
     yBufferBottom: 0
-  previousVPos: 0
+  referencePos: 0
 --- !u!114 &114453227104322662
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -247,7 +247,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 200
   boost: 1.75
-  rotationMultiplier: 1
+  rotationMultiplier: 4
 --- !u!114 &114706733137868148
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -331,7 +331,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -4.780222, y: 0.56631565}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224426572386249932

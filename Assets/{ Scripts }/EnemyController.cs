@@ -22,11 +22,6 @@ public class EnemyController : MonoBehaviour {
         es.UpdateRefPos();
     }
 
-    private void Update()
-    {
-        DisplayPositionText();
-    }
-
     private void FixedUpdate()
     {
         // Screen limits
@@ -49,7 +44,7 @@ public class EnemyController : MonoBehaviour {
                 (transform.position.x >= viewMax.x - boundary.xBuffer && es.moveLeft == false))
             )
         {
-            referencePos = transform.position.y;
+            es.UpdateRefPos();
             es.moveForward = true;
         }
 
@@ -59,9 +54,7 @@ public class EnemyController : MonoBehaviour {
         {
             if(transform.position.y > referencePos - 1)
             {
-                // transform.position = new Vector3(transform.position.x, previousVPos - 1f, 0f);
                 ms.ShipMove(0f, -1f);
-                // Debug.Log("MOVING FORWARD!: " + Time.fixedTime);
             }
             else
             {
@@ -71,17 +64,8 @@ public class EnemyController : MonoBehaviour {
                 } else if (es.moveLeft == false) {
                     es.moveLeft = true; }
 
-                
-                DisplayPositionText();
-
                 es.moveForward = false;
             }
         }
-    }
-
-    void DisplayPositionText()
-    {
-        text.text = "ref Y pos: " + referencePos + "\n" +
-            "current pos: " + transform.position.y;
     }
 }

@@ -4,24 +4,30 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour {
 
-    public Transform enemy1;
+    public GameObject enemy1;
     public float distanceToEdge;
     public bool moveLeft = false;
     public bool moveForward = false;
+    private List<GameObject> enemies = new List<GameObject>();
 
     private void Start()
     {
         foreach(Transform pos in transform)
         {
-            Instantiate(enemy1, pos.transform.position, Quaternion.identity, pos.transform);
+            GameObject enemy = Instantiate(enemy1, pos.transform.position, Quaternion.identity, pos.transform) as GameObject;
+            enemies.Add(enemy);
         }
     }
 
+    // Updates reference position for advancement of all enemy ships in wave
     public void UpdateRefPos()
     {
-        foreach(EnemyController enemy in transform)
+        int listCount = enemies.Count;
+
+        while (listCount > 0)
         {
-            enemy.referencePos = enemy.transform.position.y;
+            enemies[listCount - 1].GetComponent<EnemyController>().referencePos = enemies[listCount - 1].transform.position.y;
+            listCount--;
         }
     }
 }
