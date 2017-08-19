@@ -1,16 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 
 public class EnemyController : MonoBehaviour {
 
     public Boundary boundary;
     public float referencePos = 0f;
+    public float distanceToAdvance = 1f;
     private EnemySpawner es;
     private MoveShip ms;
-    private Text text;
     Camera cam;
 
     private void Start()
@@ -18,7 +17,6 @@ public class EnemyController : MonoBehaviour {
         es = FindObjectOfType<EnemySpawner>();
         ms = GetComponent<MoveShip>();
         cam = Camera.main;
-        text = GetComponentInChildren<Text>();
         es.UpdateRefPos();
     }
 
@@ -52,7 +50,7 @@ public class EnemyController : MonoBehaviour {
         // move forward
         if (es.moveForward == true)
         {
-            if(transform.position.y > referencePos - 1)
+            if(transform.position.y > referencePos - distanceToAdvance)
             {
                 ms.ShipMove(0f, -1f);
             }
