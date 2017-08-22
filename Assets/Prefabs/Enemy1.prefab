@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 64847724859869872}
   m_Layer: 0
   m_Name: Destroyer
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -118,13 +118,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1889793507930396}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
   m_LocalPosition: {x: 0, y: -0.05, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224311825583199972}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!23 &23159307320630082
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -264,6 +264,7 @@ MonoBehaviour:
     yBufferBottom: 0
   referencePos: 0
   distanceToAdvance: 0.75
+  markForDestruction: 0
 --- !u!114 &114453227104322662
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -305,7 +306,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d77aa0dfdfe437d44bb986c5b81b51fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shot: {fileID: 4694789623530754, guid: 193ca8ee2062c48489fdda50f5fdd0d4, type: 2}
+  shot: {fileID: 4694789623530754, guid: a582c416fe82de04d855db63f0d21a30, type: 2}
 --- !u!222 &222576032333242734
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -374,7 +375,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -5.3127975, y: 2.254345}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224426572386249932

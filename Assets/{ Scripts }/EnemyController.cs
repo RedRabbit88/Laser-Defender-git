@@ -8,6 +8,7 @@ public class EnemyController : MonoBehaviour {
     public Boundary boundary;
     public float referencePos = 0f;
     public float distanceToAdvance = 1f;
+    public bool markForDestruction = false;
     private EnemySpawner es;
     private MoveShip ms;
     Camera cam;
@@ -65,5 +66,12 @@ public class EnemyController : MonoBehaviour {
                 es.moveForward = false;
             }
         }
+    }
+
+    public void DestroyShip()
+    {
+        markForDestruction = true;
+        es.RemoveFromList();
+        Destroy(gameObject);
     }
 }

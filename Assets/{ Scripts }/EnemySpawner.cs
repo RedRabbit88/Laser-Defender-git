@@ -17,6 +17,7 @@ public class EnemySpawner : MonoBehaviour {
             GameObject enemy = Instantiate(enemy1, pos.transform.position, Quaternion.identity, pos.transform) as GameObject;
             enemies.Add(enemy);
         }
+        RemoveFromList();
     }
 
     // Updates reference position for advancement of all enemy ships in wave
@@ -27,6 +28,21 @@ public class EnemySpawner : MonoBehaviour {
         while (listCount > 0)
         {
             enemies[listCount - 1].GetComponent<EnemyController>().referencePos = enemies[listCount - 1].transform.position.y;
+            listCount--;
+        }
+    }
+
+    public void RemoveFromList()
+    {
+        int listCount = enemies.Count;
+
+        while (listCount > 0)
+        {
+            if (enemies[listCount - 1].GetComponent<EnemyController>().markForDestruction == true)
+            {
+                enemies.Remove(enemies[listCount - 1]);
+                return;
+            }
             listCount--;
         }
     }

@@ -20,8 +20,6 @@ public class BoundaryDestroyer : MonoBehaviour {
         xmax = Camera.main.ViewportToWorldPoint(new Vector3(1f, 0f, 0f)).x;
         ymax = Camera.main.ViewportToWorldPoint(new Vector3(0f, 1f, 0f)).y;
 
-        Debug.Log("xmax: " + xmax + " | ymax: " + ymax);
-
         colSize.x = xmax * 2 + boundaryBuffer;
         colSize.y = ymax * 2 + boundaryBuffer;
         colSize.z = 2f;

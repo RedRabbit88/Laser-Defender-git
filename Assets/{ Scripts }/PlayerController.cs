@@ -46,4 +46,9 @@ public class PlayerController : MonoBehaviour {
             ms.ShipMove(h, v);
         }
     }
+
+    public void DestroyShip()
+    {
+        Destroy(gameObject);
+    }
 }
