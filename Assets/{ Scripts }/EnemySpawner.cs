@@ -9,9 +9,12 @@ public class EnemySpawner : MonoBehaviour {
     public bool moveLeft = false;
     public bool moveForward = false;
     private List<GameObject> enemies = new List<GameObject>();
+    private GameObject gameManager;
 
     private void Start()
     {
+        // associate / instantiate gameManager ...
+
         foreach(Transform pos in transform)
         {
             GameObject enemy = Instantiate(enemy1, pos.transform.position, Quaternion.identity, pos.transform) as GameObject;

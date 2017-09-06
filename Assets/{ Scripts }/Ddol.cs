@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ddol : MonoBehaviour {
+public class DDOL : MonoBehaviour {
 
 	void Start () {
         DontDestroyOnLoad(gameObject);
