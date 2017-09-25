@@ -13,14 +13,23 @@ public class EnemySpawner : MonoBehaviour {
 
     private void Start()
     {
-        // associate / instantiate gameManager ...
+        Invoke("NewWave", 2f);
+    }
 
-        foreach(Transform pos in transform)
+    private void NewWave()
+    {
+        foreach (Transform pos in transform)
         {
-            GameObject enemy = Instantiate(enemy1, pos.transform.position, Quaternion.identity, pos.transform) as GameObject;
-            enemies.Add(enemy);
+            StartCoroutine(SpawnEnemy(pos));
         }
-        RemoveFromList();
+    }
+
+    IEnumerator SpawnEnemy(Transform pos)
+    {
+        //yield return new WaitForSeconds(Random.Range(0.1f, 1.5f));
+        GameObject enemy = Instantiate(enemy1, pos.transform.position, Quaternion.identity, pos.transform) as GameObject;
+        enemies.Add(enemy);
+        yield return null;
     }
 
     // Updates reference position for advancement of all enemy ships in wave
@@ -44,9 +53,18 @@ public class EnemySpawner : MonoBehaviour {
             if (enemies[listCount - 1].GetComponent<EnemyController>().markForDestruction == true)
             {
                 enemies.Remove(enemies[listCount - 1]);
-                return;
+                break;
             }
             listCount--;
+        }
+
+        // re-evaluate list count & generate new wave if no enemies left.
+        listCount = enemies.Count;
+        Debug.Log("current listCount: " + listCount);
+
+        if (listCount <= 0)
+        {
+            Invoke("NewWave", 2f);
         }
     }
 }
