@@ -262,6 +262,9 @@ MonoBehaviour:
     xBuffer: 1
     yBufferTop: 0
     yBufferBottom: 0
+  explosion: {fileID: 1079178297772356, guid: 5a0b205ef3dc33b488fc327081a2f0f7, type: 2}
+  enemyHealth: 2
+  enemyValue: 10
   referencePos: 0
   distanceToAdvance: 0.75
   markForDestruction: 0
@@ -307,6 +310,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shot: {fileID: 4694789623530754, guid: a582c416fe82de04d855db63f0d21a30, type: 2}
+  shotDamage: 1
+  shotRateLimit: 0
 --- !u!222 &222576032333242734
 CanvasRenderer:
   m_ObjectHideFlags: 1

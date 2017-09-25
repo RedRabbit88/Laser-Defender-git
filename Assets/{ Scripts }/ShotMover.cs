@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class ShotMover : MonoBehaviour {
 
-    public float shotSpeed = 1;
     public string target;
+    public float shotSpeed = 1f;
+    public int shotPower;
+    public GameObject hitExplosion;
     private Rigidbody rb;
 
 	// Use this for initialization
@@ -19,9 +21,10 @@ public class ShotMover : MonoBehaviour {
         if (other.tag == target)
         {
             if (other.tag == "Enemy") {
-                other.transform.parent.GetComponent<EnemyController>().DestroyShip(); }
+                other.transform.parent.GetComponent<EnemyController>().DestroyShip(shotPower); }
             else if (other.tag == "Player") {
-                other.transform.parent.GetComponent<PlayerController>().DestroyShip(); }
+                other.transform.parent.GetComponent<PlayerController>().DestroyShip(shotPower); }
+            Instantiate(hitExplosion, transform.position, transform.rotation);
             Destroy(gameObject);
         }
     }

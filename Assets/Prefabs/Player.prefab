@@ -213,6 +213,8 @@ MonoBehaviour:
     xBuffer: 1
     yBufferTop: 3
     yBufferBottom: 1
+  explosion: {fileID: 1079178297772356, guid: 5a0b205ef3dc33b488fc327081a2f0f7, type: 2}
+  playerHealth: 2
 --- !u!114 &114900553050424206
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -225,3 +227,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shot: {fileID: 4694789623530754, guid: 193ca8ee2062c48489fdda50f5fdd0d4, type: 2}
+  shotDamage: 1
+  shotRateLimit: 0.2

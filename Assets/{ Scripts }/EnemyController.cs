@@ -6,17 +6,22 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour {
 
     public Boundary boundary;
+    public GameObject explosion;
+    public int enemyHealth;
+    public int enemyValue;
     public float referencePos = 0f;
     public float distanceToAdvance = 1f;
     public bool markForDestruction = false;
     private EnemySpawner es;
     private MoveShip ms;
+    private ScoreManager sm;
     Camera cam;
 
     private void Start()
     {
         es = FindObjectOfType<EnemySpawner>();
         ms = GetComponent<MoveShip>();
+        sm = FindObjectOfType<ScoreManager>();
         cam = Camera.main;
         es.UpdateRefPos();
     }
@@ -68,10 +73,17 @@ public class EnemyController : MonoBehaviour {
         }
     }
 
-    public void DestroyShip()
+    public void DestroyShip(int damage)
     {
-        markForDestruction = true;
-        es.RemoveFromList();
-        Destroy(gameObject);
+        enemyHealth -= damage;
+
+        if(enemyHealth <= 0)
+        {
+            sm.ScoreAdd(enemyValue);
+            markForDestruction = true;
+            es.RemoveFromList();
+            Instantiate(explosion, transform.position, transform.rotation);
+            Destroy(gameObject);
+        }
     }
 }

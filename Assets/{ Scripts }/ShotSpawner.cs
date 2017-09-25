@@ -5,6 +5,9 @@ using UnityEngine;
 public class ShotSpawner : MonoBehaviour {
 
     public Transform shot;
+    public int shotDamage = 1;
+    public float shotRateLimit;
+    private float shotTimeSinceLastShot;
     private GameObject parent;
 
     private void Start()
@@ -22,13 +25,18 @@ public class ShotSpawner : MonoBehaviour {
         if (parent.tag == "Player" &&
             (Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Space)))
         {
-            Fire();
+            if(shotTimeSinceLastShot <= Time.time - shotRateLimit)
+            {
+                Fire();
+                shotTimeSinceLastShot = Time.time;
+            }
         }
     }
 
     private void Fire()
     {
-        Instantiate(shot, transform.position, transform.rotation);
+        Transform projectile = Instantiate(shot, transform.position, transform.rotation) as Transform;
+        projectile.GetComponent<ShotMover>().shotPower = shotDamage;
     }
 
     private void OnDrawGizmos()

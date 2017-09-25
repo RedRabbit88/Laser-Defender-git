@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
     public Boundary boundary;
+    public GameObject explosion;
+    public int playerHealth;
     private MoveShip ms;
     Camera cam;
 
@@ -47,8 +49,14 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    public void DestroyShip()
+    public void DestroyShip(int damage)
     {
-        Destroy(gameObject);
+        playerHealth -= damage;
+
+        if(playerHealth <= 0)
+        {
+            Instantiate(explosion, transform.position, transform.rotation);
+            Destroy(gameObject);
+        }
     }
 }
