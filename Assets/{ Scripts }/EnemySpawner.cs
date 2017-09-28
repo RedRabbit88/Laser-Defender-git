@@ -8,16 +8,46 @@ public class EnemySpawner : MonoBehaviour {
     public float distanceToEdge;
     public bool moveLeft = false;
     public bool moveForward = false;
+    public bool inTransit = true;
+    private int enemiesExpected;
+    private int enemiesArrived;
     private List<GameObject> enemies = new List<GameObject>();
     private GameObject gameManager;
 
+    public int EnemiesArrived
+    {
+        get             { return enemiesArrived; }
+        private set     { enemiesArrived = value;  }
+    }
+
+    public void DeclareArrival()
+    {
+        EnemiesArrived++;
+        if(EnemiesArrived == enemiesExpected)
+        {
+            inTransit = false;
+        }
+    }
+
+    public void ResetArrivals()
+    {
+        EnemiesArrived = 0;
+        inTransit = true;
+    }
+
     private void Start()
     {
+        foreach (Transform pos in transform)
+        {
+            enemiesExpected++;
+        }
+
         Invoke("NewWave", 2f);
     }
 
     private void NewWave()
     {
+        ResetArrivals();
         foreach (Transform pos in transform)
         {
             StartCoroutine(SpawnEnemy(pos));
@@ -26,7 +56,7 @@ public class EnemySpawner : MonoBehaviour {
 
     IEnumerator SpawnEnemy(Transform pos)
     {
-        //yield return new WaitForSeconds(Random.Range(0.1f, 1.5f));
+        yield return new WaitForSeconds(Random.Range(0.1f, 1.5f));
         GameObject enemy = Instantiate(enemy1, pos.transform.position, Quaternion.identity, pos.transform) as GameObject;
         enemies.Add(enemy);
         yield return null;
@@ -60,7 +90,6 @@ public class EnemySpawner : MonoBehaviour {
 
         // re-evaluate list count & generate new wave if no enemies left.
         listCount = enemies.Count;
-        Debug.Log("current listCount: " + listCount);
 
         if (listCount <= 0)
         {

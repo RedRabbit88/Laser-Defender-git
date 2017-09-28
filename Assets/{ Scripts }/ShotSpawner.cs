@@ -9,11 +9,16 @@ public class ShotSpawner : MonoBehaviour {
     public float shotRateLimit;
     private float shotTimeSinceLastShot;
     private GameObject parent;
+    private EnemySpawner es;
+
+    private void Awake()
+    {
+        parent = transform.parent.gameObject;
+        es = FindObjectOfType<EnemySpawner>();
+    }
 
     private void Start()
     {
-        parent = transform.parent.gameObject;
-
         if(parent.tag == "Enemy")
         {
             InvokeRepeating("Fire", Random.Range(0.5f, 2f), Random.Range(1f, 3f));
@@ -35,8 +40,11 @@ public class ShotSpawner : MonoBehaviour {
 
     private void Fire()
     {
-        Transform projectile = Instantiate(shot, transform.position, transform.rotation) as Transform;
-        projectile.GetComponent<ShotMover>().shotPower = shotDamage;
+        if(parent.tag == "Player" || (parent.tag == "Enemy" && es.inTransit == false))
+        {
+            Transform projectile = Instantiate(shot, transform.position, transform.rotation) as Transform;
+            projectile.GetComponent<ShotMover>().shotPower = shotDamage;
+        }
     }
 
     private void OnDrawGizmos()

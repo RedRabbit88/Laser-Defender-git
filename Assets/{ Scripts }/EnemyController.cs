@@ -12,19 +12,29 @@ public class EnemyController : MonoBehaviour {
     public float referencePos = 0f;
     public float distanceToAdvance = 1f;
     public bool markForDestruction = false;
+    private MeshCollider mcol;
     private EnemySpawner es;
     private MoveShip ms;
     private ScoreManager sm;
+    private Animator anim;
     Camera cam;
 
-    private void Start()
+
+    private void Awake()
     {
+        mcol = transform.GetComponentInChildren<MeshCollider>();
         es = FindObjectOfType<EnemySpawner>();
         ms = GetComponent<MoveShip>();
         sm = FindObjectOfType<ScoreManager>();
+        anim = GetComponent<Animator>();
         cam = Camera.main;
+    }
+
+    private void Start()
+    {
         es.UpdateRefPos();
     }
+
 
     private void FixedUpdate()
     {
@@ -32,46 +42,68 @@ public class EnemyController : MonoBehaviour {
         Vector3 viewMax = cam.ViewportToWorldPoint(new Vector3(1f, 1f, 0f));
         Vector3 viewMin = cam.ViewportToWorldPoint(new Vector3(0f, 0f, 0f));
 
-
-        // move left
-        if (es.moveForward == false && es.moveLeft == true) {
-            ms.ShipMove(-1f, 0f); }
-
-        // move right
-        if (es.moveForward == false && es.moveLeft == false) {
-            ms.ShipMove(1f, 0f); }
-
-
-        // if either boundary reached
-        if (es.moveForward == false &&
-                ((transform.position.x <= viewMin.x + boundary.xBuffer && es.moveLeft == true) ||
-                (transform.position.x >= viewMax.x - boundary.xBuffer && es.moveLeft == false))
-            )
+        if (es.inTransit == false)
         {
-            es.UpdateRefPos();
-            es.moveForward = true;
-        }
+            // move left
+            if (es.moveForward == false && es.moveLeft == true)
+            {
+                ms.ShipMove(-1f, 0f);
+            }
+
+            // move right
+            if (es.moveForward == false && es.moveLeft == false)
+            {
+                ms.ShipMove(1f, 0f);
+            }
 
 
-        // move forward
-        if (es.moveForward == true)
+            // if either boundary reached
+            if (es.moveForward == false &&
+                    ((transform.position.x <= viewMin.x + boundary.xBuffer && es.moveLeft == true) ||
+                    (transform.position.x >= viewMax.x - boundary.xBuffer && es.moveLeft == false))
+                )
+            {
+                es.UpdateRefPos();
+                es.moveForward = true;
+            }
+
+
+            // move forward
+            if (es.moveForward == true)
+            {
+                if (transform.position.y > referencePos - distanceToAdvance)
+                {
+                    ms.ShipMove(0f, -1f);
+                }
+                else
+                {
+                    // change direction
+                    if (es.moveLeft == true)
+                    {
+                        es.moveLeft = false;
+                    }
+                    else if (es.moveLeft == false)
+                    {
+                        es.moveLeft = true;
+                    }
+
+                    es.moveForward = false;
+                }
+            }
+        } else if (es.inTransit == true)
         {
-            if(transform.position.y > referencePos - distanceToAdvance)
-            {
-                ms.ShipMove(0f, -1f);
-            }
-            else
-            {
-                // change direction
-                if (es.moveLeft == true) {
-                    es.moveLeft = false;
-                } else if (es.moveLeft == false) {
-                    es.moveLeft = true; }
-
-                es.moveForward = false;
-            }
+            ms.ShipMove(0f, 0f);
         }
     }
+
+
+    public void EnemyArrived()
+    {
+        es.DeclareArrival();
+        anim.enabled = false;
+        mcol.enabled = true;
+    }
+
 
     public void DestroyShip(int damage)
     {
