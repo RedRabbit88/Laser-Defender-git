@@ -10,10 +10,12 @@ public class ShotSpawner : MonoBehaviour {
     private float shotTimeSinceLastShot;
     private GameObject parent;
     private EnemySpawner es;
+    private AudioManager am;
 
     private void Awake()
     {
         parent = transform.parent.gameObject;
+        am = FindObjectOfType<AudioManager>();
         es = FindObjectOfType<EnemySpawner>();
     }
 
@@ -40,10 +42,18 @@ public class ShotSpawner : MonoBehaviour {
 
     private void Fire()
     {
-        if(parent.tag == "Player" || (parent.tag == "Enemy" && es.inTransit == false))
+        if (parent.tag == "Player" || (parent.tag == "Enemy" && es.inTransit == false))
         {
+            am.ShotPlayer();
             Transform projectile = Instantiate(shot, transform.position, transform.rotation) as Transform;
             projectile.GetComponent<ShotMover>().shotPower = shotDamage;
+        }
+
+        if (parent.tag == "Player") {
+            am.ShotPlayer();
+        }
+        else if (parent.tag == "Enemy" && es.inTransit == false) {
+            am.ShotEnemy();
         }
     }
 

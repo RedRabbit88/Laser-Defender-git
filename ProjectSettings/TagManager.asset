@@ -8,6 +8,10 @@ TagManager:
   - Projectile
   - ScoreManager
   - GameManager
+  - ScoreText
+  - HighScoreText
+  - LivesText
+  - GameOverText
   layers:
   - Default
   - TransparentFX

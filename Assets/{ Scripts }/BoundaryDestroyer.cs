@@ -36,7 +36,9 @@ public class BoundaryDestroyer : MonoBehaviour {
 
         if (other.tag == "Enemy")
         {
-            other.GetComponentInParent<EnemyController>().DestroyShip(99999);
+            EnemyController ec = other.GetComponentInParent<EnemyController>();
+            ec.destroyedByPlayer = false;
+            ec.DestroyShip(ec.startingHealth);
         }
     }
 }

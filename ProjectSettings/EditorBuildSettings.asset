@@ -6,10 +6,13 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/{ Scenes }/BootstrapLoader.unity
+    guid: 215531744bba30341b280e7a800512f4
+  - enabled: 1
     path: Assets/{ Scenes }/MainMenu.unity
     guid: 9eacbbec494132142a34b74dc691ace4
   - enabled: 1
-    path: Assets/{ Scenes }/Level_01.unity
+    path: Assets/{ Scenes }/Game.unity
     guid: cfde9e1f242ec0c4a83ce442ef0d7a5f
   - enabled: 1
     path: Assets/{ Scenes }/Win.unity

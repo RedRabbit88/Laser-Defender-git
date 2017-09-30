@@ -9,12 +9,15 @@ public class EnemyController : MonoBehaviour {
     public GameObject explosion;
     public int enemyHealth;
     public int enemyValue;
+    public int startingHealth;
     public float referencePos = 0f;
     public float distanceToAdvance = 1f;
     public bool markForDestruction = false;
+    public bool destroyedByPlayer = true;
     private MeshCollider mcol;
     private EnemySpawner es;
     private MoveShip ms;
+    private AudioManager am;
     private ScoreManager sm;
     private Animator anim;
     Camera cam;
@@ -25,9 +28,11 @@ public class EnemyController : MonoBehaviour {
         mcol = transform.GetComponentInChildren<MeshCollider>();
         es = FindObjectOfType<EnemySpawner>();
         ms = GetComponent<MoveShip>();
+        am = FindObjectOfType<AudioManager>();
         sm = FindObjectOfType<ScoreManager>();
         anim = GetComponent<Animator>();
         cam = Camera.main;
+        startingHealth = enemyHealth;
     }
 
     private void Start()
@@ -111,9 +116,13 @@ public class EnemyController : MonoBehaviour {
 
         if(enemyHealth <= 0)
         {
-            sm.ScoreAdd(enemyValue);
+            if(destroyedByPlayer == true)
+            {
+                sm.ScoreAdd(enemyValue);
+            }
             markForDestruction = true;
             es.RemoveFromList();
+            am.Explosion();
             Instantiate(explosion, transform.position, transform.rotation);
             Destroy(gameObject);
         }

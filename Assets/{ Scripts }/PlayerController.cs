@@ -7,13 +7,30 @@ public class PlayerController : MonoBehaviour {
     public Boundary boundary;
     public GameObject explosion;
     public int playerHealth;
+    public int playerLives;
     private MoveShip ms;
+    private GameObject gameManager;
+    private AudioManager am;
+    private ScoreManager sm;
+    private SessionManager session;
     Camera cam;
 
     private void Start()
     {
+        gameManager = GameObject.FindGameObjectWithTag("GameManager");
+        am = gameManager.GetComponent<AudioManager>();
+        sm = gameManager.GetComponent<ScoreManager>();
+        session = gameManager.GetComponent<SessionManager>();
         ms = GetComponent<MoveShip>();
         cam = Camera.main;
+
+        if(session.sessionRunning == false)
+        {
+            sm.InitializeScore();
+            session.sessionRunning = true;
+        }
+
+        sm.LivesUpdate(session.playerLives);
     }
 
     private void Update()
@@ -55,6 +72,8 @@ public class PlayerController : MonoBehaviour {
 
         if(playerHealth <= 0)
         {
+            am.Explosion();
+            session.RespawnPlayer();
             Instantiate(explosion, transform.position, transform.rotation);
             Destroy(gameObject);
         }
